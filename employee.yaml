@@ -1,0 +1,112 @@
+apiVersion: digital-employee/v1
+kind: DigitalEmployee
+metadata:
+  id: de_ecommerce_customer_service_assistant
+  name: 智能客服+售后
+  alias: 客服专员·小服
+  repo: de-ecommerce-customer-service-assistant
+  card_no: 6.4-②
+  group: ecommerce
+  group_label: 电商商家
+  phase: P0 首发（与开源首批示例 `ecommerce-customer-service-employee` 完全对齐）
+  complexity: M
+  score: 高频5｜痛点5｜客单价3｜广度5｜价值5 ＝ **23/25**
+  price: 30-60 元/月（店小蜜已验证按通计费，据R3调研）
+  channels:
+  - GitHub（开源标杆资产）
+  - Coze扣子商店（Bot 直接上架）
+  - 小红书
+  - 抖音
+  license: Proprietary
+  version: 1.0.0
+spec:
+  positioning: 客服专员·小服 ｜ 一人店的 7×24 客服坐席
+  users: 日均咨询 30-300 条、跨 2 个以上平台的一人店
+  boundary: 做：售前导购、订单物流查询、售后安抚、夜间值守；不做：退款审批、赔付决策（一律转人工）
+  kpi: 首响 ≤30 秒；AI 解决率 ≥70%；夜间承接率 100%；转人工率 ≤25%
+  roi_summary: 月省客服工时约 60h≈¥1800 vs 月费 ≤¥60
+  demand_refs:
+  - D08
+  - D07
+  demand_support: 充分
+  demand_evidence: 中
+runtime:
+  system_prompt: persona/system-prompt.md
+  boundary: persona/boundary.md
+  kpi: persona/kpi.md
+deliverables:
+  skills:
+  - slug: handoff-to-human
+    name: 转人工分流
+    kind: private
+    path: skills/handoff-to-human
+    version: 1.0.0
+    maturity: implemented
+  - slug: logistics-tracking-reader
+    name: 物流跟踪解读
+    kind: private
+    path: skills/logistics-tracking-reader
+    version: 1.0.0
+    maturity: contract-complete
+  - slug: negotiation-copy
+    name: 议价话术
+    kind: private
+    path: skills/negotiation-copy
+    version: 1.0.0
+    maturity: contract-complete
+  - slug: return-policy-answer
+    name: 退换货政策应答
+    kind: private
+    path: skills/return-policy-answer
+    version: 1.0.0
+    maturity: contract-complete
+  workflows:
+  - slug: wf-ecom-cs-presale-guide
+    name: 售前智能导购
+    path: workflows/wf-ecom-cs-presale-guide
+    version: 1.0.0
+    phase: P0
+    calls:
+    - doc-qa-rag
+    - negotiation-copy
+  - slug: wf-ecom-cs-logistics
+    name: 订单/物流自动查询
+    path: workflows/wf-ecom-cs-logistics
+    version: 1.0.0
+    phase: P0
+    calls:
+    - logistics-tracking-reader
+  - slug: wf-ecom-cs-after-sale-triage
+    name: 售后工单分流与安抚
+    path: workflows/wf-ecom-cs-after-sale-triage
+    version: 1.0.0
+    phase: P0
+    calls:
+    - review-sentiment-tag
+    - handoff-to-human
+  - slug: wf-ecom-cs-night-watch
+    name: 夜间值守+次日汇总
+    path: workflows/wf-ecom-cs-night-watch
+    version: 1.0.0
+    phase: P0
+    calls:
+    - doc-qa-rag
+    - brief-generator
+  - slug: wf-ecom-cs-review-linkage
+    name: 差评预警联动
+    path: workflows/wf-ecom-cs-review-linkage
+    version: 1.0.0
+    phase: P1
+    calls:
+    - review-sentiment-tag
+  knowledge_base: kb/
+  connectors: connectors/bindings.yaml
+external_dependencies:
+- repo: agent-skills-core
+  version: 1.0.0
+  skills:
+  - brief-generator
+  - doc-qa-rag
+  - review-sentiment-tag
+  resolution: external
+spec_only_dependencies: []
