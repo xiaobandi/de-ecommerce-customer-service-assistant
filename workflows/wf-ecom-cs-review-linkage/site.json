@@ -1,0 +1,15 @@
+{
+  "name": "wf-ecom-cs-review-linkage",
+  "title": "差评预警联动",
+  "kind": "workflow",
+  "owner": "de-ecommerce-customer-service-assistant",
+  "complexity": "S",
+  "phase": "P1",
+  "one_liner": "情感分析→安抚话术推送店主",
+  "pages": [
+    "docs/使用手册.html",
+    "docs/使用示例.html",
+    "docs/用户场景.html",
+    "docs/架构与流程图.html"
+  ]
+}

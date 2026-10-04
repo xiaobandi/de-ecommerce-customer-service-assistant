@@ -1,0 +1,15 @@
+{
+  "name": "wf-ecom-cs-presale-guide",
+  "title": "售前智能导购",
+  "kind": "workflow",
+  "owner": "de-ecommerce-customer-service-assistant",
+  "complexity": "M",
+  "phase": "P0",
+  "one_liner": "意图识别→知识库检索→话术→商品推荐",
+  "pages": [
+    "docs/使用手册.html",
+    "docs/使用示例.html",
+    "docs/用户场景.html",
+    "docs/架构与流程图.html"
+  ]
+}

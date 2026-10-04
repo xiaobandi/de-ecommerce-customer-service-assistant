@@ -1,53 +1,68 @@
 ---
-name: wf-ecom-cs-review-linkage
+name: wf-ecom-cs-night-watch
 description: >-
-  智能客服+售后 的「差评预警联动」工作流：情感分析→安抚话术推送店主。触发方式：事件（新评价）。
-  当用户要完成「差评预警联动」这件事、或触发了上述条件时使用。
+  智能客服+售后 的「夜间值守+次日汇总」工作流：自动应答→异常标记→晨报推送。触发方式：定时（22:00-8:00 + 8:30 晨报）。
+  当用户要完成「夜间值守+次日汇总」这件事、或触发了上述条件时使用。
 license: Proprietary
+compatibility: >-
+  需要能读取工作区文件；若环境支持执行代码，将额外启用 scripts/ 下的确定性脚本路径。
+  跨 WorkBuddy / ChatGPT / DeepSeek Harness / Kimi Work / 豆包工作。
 metadata:
   author: PLATFORM
   version: "1.0.0"
   standard: agent-skills/v1
+  library: agent-skills-library
   layer: L2-workflow
   owner: de_ecommerce_customer_service_assistant
+  repo: de-ecommerce-customer-service-assistant
+  visibility: private_to_employee
+  delivery: employee
   complexity: S
-  phase: P1
+  phase: P0
   source: library
 ---
 
-# 差评预警联动
+# 夜间值守+次日汇总
 
-> 归属：**智能客服+售后**（`de-ecommerce-customer-service-assistant`）　触发：事件（新评价）　
-> 复杂度 S　阶段 P1
+> 归属：**智能客服+售后**（`de-ecommerce-customer-service-assistant`）　触发：定时（22:00-8:00 + 8:30 晨报）　
+> 复杂度 S　阶段 P0
 
 ## 一、这条工作流解决什么
 
-情感分析→安抚话术推送店主
+自动应答→异常标记→晨报推送
 
-**业务收益**：与③共享链路，零增量成本
+**业务收益**：夜间丢单挽回，月省 20h≈¥600
 
 ## 二、调用的 SKILL（必填列，逐条锁定版本）
 
 | 技能名 | slug | 来源仓 | 版本 |
 |---|---|---|---|
-| `评论情绪识别` | `review-sentiment-tag` | core | v1.0.0 |
+| `文档问答（RAG）` | `doc-qa-rag` | core | v1.0.0 |
+| `简报生成` | `brief-generator` | core | v1.0.0 |
 
 > 公共技能来自 `agent-skills-core@1.0.0`，本仓库只做外部依赖引用，
 > **不内联复制**其正文——这是三层仓库体系的硬规则，避免同一能力多份副本各自漂移。
 
 ## 三、执行步骤（每步四要素齐备）
 
-### 步骤 1：情感分析
+### 步骤 1：自动应答
 
-- **做**：情感分析
+- **做**：自动应答
 - **输入来源**：用户提供的原始材料（工作流第 1 步没有「上一步」）/ 本员工知识库 `kb/` / 连接器只读数据；三者皆空时必须停在 G1 闸门
 - **依据与结论**：把本步结论对应到具体输入项
 - **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
 
-### 步骤 2：安抚话术推送店主
+### 步骤 2：异常标记
 
-- **做**：安抚话术推送店主
+- **做**：异常标记
 - **输入来源**：步骤 1 的产出 / 本员工知识库 `kb/` / 连接器只读数据
+- **依据与结论**：把本步结论对应到具体输入项
+- **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
+
+### 步骤 3：晨报推送
+
+- **做**：晨报推送
+- **输入来源**：步骤 2 的产出 / 本员工知识库 `kb/` / 连接器只读数据
 - **依据与结论**：把本步结论对应到具体输入项
 - **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
 

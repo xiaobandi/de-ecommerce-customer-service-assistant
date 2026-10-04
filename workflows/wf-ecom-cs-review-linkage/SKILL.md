@@ -1,68 +1,60 @@
 ---
-name: wf-ecom-cs-presale-guide
+name: wf-ecom-cs-review-linkage
 description: >-
-  智能客服+售后 的「售前智能导购」工作流：意图识别→知识库检索→话术→商品推荐。触发方式：事件（买家消息）。
-  当用户要完成「售前智能导购」这件事、或触发了上述条件时使用。
+  智能客服+售后 的「差评预警联动」工作流：情感分析→安抚话术推送店主。触发方式：事件（新评价）。
+  当用户要完成「差评预警联动」这件事、或触发了上述条件时使用。
 license: Proprietary
+compatibility: >-
+  需要能读取工作区文件；若环境支持执行代码，将额外启用 scripts/ 下的确定性脚本路径。
+  跨 WorkBuddy / ChatGPT / DeepSeek Harness / Kimi Work / 豆包工作。
 metadata:
   author: PLATFORM
   version: "1.0.0"
   standard: agent-skills/v1
+  library: agent-skills-library
   layer: L2-workflow
   owner: de_ecommerce_customer_service_assistant
-  complexity: M
-  phase: P0
+  repo: de-ecommerce-customer-service-assistant
+  visibility: private_to_employee
+  delivery: employee
+  complexity: S
+  phase: P1
   source: library
 ---
 
-# 售前智能导购
+# 差评预警联动
 
-> 归属：**智能客服+售后**（`de-ecommerce-customer-service-assistant`）　触发：事件（买家消息）　
-> 复杂度 M　阶段 P0
+> 归属：**智能客服+售后**（`de-ecommerce-customer-service-assistant`）　触发：事件（新评价）　
+> 复杂度 S　阶段 P1
 
 ## 一、这条工作流解决什么
 
-意图识别→知识库检索→话术→商品推荐
+情感分析→安抚话术推送店主
 
-**业务收益**：高峰分流，月省 25h≈¥750
+**业务收益**：与③共享链路，零增量成本
 
 ## 二、调用的 SKILL（必填列，逐条锁定版本）
 
 | 技能名 | slug | 来源仓 | 版本 |
 |---|---|---|---|
-| `文档问答（RAG）` | `doc-qa-rag` | core | v1.0.0 |
-| `议价话术` | `negotiation-copy` | 本仓 | v1.0.0 |
+| `评论情绪识别` | `review-sentiment-tag` | core | v1.0.0 |
 
 > 公共技能来自 `agent-skills-core@1.0.0`，本仓库只做外部依赖引用，
 > **不内联复制**其正文——这是三层仓库体系的硬规则，避免同一能力多份副本各自漂移。
 
 ## 三、执行步骤（每步四要素齐备）
 
-### 步骤 1：意图识别
+### 步骤 1：情感分析
 
-- **做**：意图识别
+- **做**：情感分析
 - **输入来源**：用户提供的原始材料（工作流第 1 步没有「上一步」）/ 本员工知识库 `kb/` / 连接器只读数据；三者皆空时必须停在 G1 闸门
 - **依据与结论**：把本步结论对应到具体输入项
 - **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
 
-### 步骤 2：知识库检索
+### 步骤 2：安抚话术推送店主
 
-- **做**：知识库检索
+- **做**：安抚话术推送店主
 - **输入来源**：步骤 1 的产出 / 本员工知识库 `kb/` / 连接器只读数据
-- **依据与结论**：把本步结论对应到具体输入项
-- **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
-
-### 步骤 3：话术
-
-- **做**：话术
-- **输入来源**：步骤 2 的产出 / 本员工知识库 `kb/` / 连接器只读数据
-- **依据与结论**：把本步结论对应到具体输入项
-- **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
-
-### 步骤 4：商品推荐
-
-- **做**：商品推荐
-- **输入来源**：步骤 3 的产出 / 本员工知识库 `kb/` / 连接器只读数据
 - **依据与结论**：把本步结论对应到具体输入项
 - **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
 

@@ -1,0 +1,15 @@
+{
+  "name": "negotiation-copy",
+  "title": "议价话术",
+  "kind": "skill",
+  "owner": "de-ecommerce-customer-service-assistant",
+  "complexity": "S",
+  "phase": "P0",
+  "one_liner": "价格异议处理、底线内让步（议价消息→话术）",
+  "pages": [
+    "docs/使用手册.html",
+    "docs/使用示例.html",
+    "docs/用户场景.html",
+    "docs/架构与流程图.html"
+  ]
+}

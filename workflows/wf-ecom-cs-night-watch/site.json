@@ -1,0 +1,15 @@
+{
+  "name": "wf-ecom-cs-night-watch",
+  "title": "夜间值守+次日汇总",
+  "kind": "workflow",
+  "owner": "de-ecommerce-customer-service-assistant",
+  "complexity": "S",
+  "phase": "P0",
+  "one_liner": "自动应答→异常标记→晨报推送",
+  "pages": [
+    "docs/使用手册.html",
+    "docs/使用示例.html",
+    "docs/用户场景.html",
+    "docs/架构与流程图.html"
+  ]
+}
