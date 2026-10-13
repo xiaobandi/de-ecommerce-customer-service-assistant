@@ -2,7 +2,7 @@
 name: handoff-to-human
 description: >-
   判断会话该自动应答还是转人工，并生成交接摘要，避免 AI 越界承诺。当用户提到转人工、人工接管、客服分流、越界判断、handoff to human、escalation 时使用——即使用户没有直接说出上述关键词，只要意图吻合也应触发。
-license: Proprietary
+license: Apache-2.0
 compatibility: >-
   需要能读取工作区文件。若环境支持执行代码，将额外启用 scripts/ 下的确定性脚本路径。跨 WorkBuddy / ChatGPT / DeepSeek Harness / Kimi Work / 豆包工作。
 metadata:

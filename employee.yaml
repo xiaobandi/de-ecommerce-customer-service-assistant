@@ -17,7 +17,7 @@ metadata:
   - Coze扣子商店（Bot 直接上架）
   - 小红书
   - 抖音
-  license: Proprietary
+  license: Apache-2.0
   version: 1.0.0
 spec:
   positioning: 客服专员·小服 ｜ 一人店的 7×24 客服坐席

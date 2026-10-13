@@ -3,7 +3,7 @@ name: wf-ecom-cs-presale-guide
 description: >-
   智能客服+售后 的「售前智能导购」工作流：意图识别→知识库检索→话术→商品推荐。触发方式：事件（买家消息）。
   当用户要完成「售前智能导购」这件事、或触发了上述条件时使用。
-license: Proprietary
+license: Apache-2.0
 compatibility: >-
   需要能读取工作区文件；若环境支持执行代码，将额外启用 scripts/ 下的确定性脚本路径。
   跨 WorkBuddy / ChatGPT / DeepSeek Harness / Kimi Work / 豆包工作。
